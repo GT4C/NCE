@@ -1,11 +1,12 @@
 from time import sleep
-
+from sftp import send_to_sftp
 import pyautogui as gui
 
 
 def move() -> None:
     # Click -> Network Management.
-    gui.moveTo(145, 720)
+    sleep(4)
+    gui.moveTo(215, 535)
     gui.click()
 
     # Wait until Network Management page is completely loaded.
@@ -14,11 +15,11 @@ def move() -> None:
     print('Network Management page loaded!')
 
     # Click -> Service.
-    gui.moveTo(605, 415)
+    gui.moveTo(853, 144)
     gui.click()
 
     # Click -> WDM Trail.
-    gui.moveTo(655, 800)
+    gui.moveTo(923, 647)
     gui.click()
 
     # Wait until WDM Trail page is completely loaded.
@@ -27,7 +28,7 @@ def move() -> None:
     print('WDM Trail page loaded!')
 
     # Click -> Manage WDM Trail.
-    gui.moveTo(155, 595)
+    gui.moveTo(212, 373)
     gui.click()
 
     # Wait until Manage WDM Trail page is completely loaded.
@@ -36,7 +37,7 @@ def move() -> None:
     print('Manage WDM Trail page loaded!')
 
     # Click -> Filter All.
-    gui.moveTo(715, 950)
+    gui.moveTo(992, 955)
     gui.click()
 
     # Wait until filter is applied.
@@ -45,11 +46,11 @@ def move() -> None:
     print('Filter applied!')
 
     # Click -> Save As.
-    gui.moveTo(1310, 729)
+    gui.moveTo(1864, 574)
     gui.click()
 
     # Click -> File name [...].
-    gui.moveTo(830, 750)
+    '''gui.moveTo(830, 750)
     gui.click()
 
     # Click -> File Type.
@@ -62,10 +63,10 @@ def move() -> None:
 
     # Click -> Save.
     gui.moveTo(800, 805)
-    gui.click()
+    gui.click()'''
 
     # Click -> OK.
-    gui.moveTo(745, 810)
+    gui.moveTo(1025, 669)
     gui.click()
 
     # Wait until Manage WDM Trail file is downloaded.
@@ -76,4 +77,6 @@ def move() -> None:
 
 if __name__ == '__main__':
     print(gui.size(), ' -> ', gui.position())
-    #move()
+    move()
+    #sleep(10)
+    #send_to_sftp()
