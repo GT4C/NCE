@@ -1,82 +1,42 @@
-from time import sleep
-from sftp import send_to_sftp
-import pyautogui as gui
+import os
+import shutil
+import re
+
+def rename_and_move_zip(new_name: str) -> None:
+
+    source_folder = '/home/mariot/NCE/origen/'
+
+    destination_folder = '/home/mariot/NCE/destino'
 
 
-def move() -> None:
-    # Click -> Network Management.
-    sleep(4)
-    gui.moveTo(215, 535)
-    gui.click()
+    # Expresión regular para encontrar el archivo con el formato correcto
+    pattern = re.compile(r"The_WDM_service_configuration_table_\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}\.zip")
+    
+    try:
+        # Buscar el archivo en la carpeta de origen
+        files = os.listdir(source_folder)
+        zip_file = next((f for f in files if pattern.match(f)), None)
 
-    # Wait until Network Management page is completely loaded.
-    print('Loading Network Management page...')
-    sleep(10)
-    print('Network Management page loaded!')
+        if not zip_file:
+            print("No se encontró un archivo con el formato esperado en la carpeta origen.")
+            return
 
-    # Click -> Service.
-    gui.moveTo(853, 144)
-    gui.click()
+        # Construir nuevo nombre del archivo reemplazando la parte inicial
+        date_part = zip_file[len("The_WDM_service_configuration_table_"):-4]  # Extrae la parte de la fecha y hora
+        new_filename = f"{new_name}_table_{date_part}.zip"
 
-    # Click -> WDM Trail.
-    gui.moveTo(923, 647)
-    gui.click()
+        # Rutas completas
+        old_path = os.path.join(source_folder, zip_file)
+        new_path = os.path.join(destination_folder, new_filename)
 
-    # Wait until WDM Trail page is completely loaded.
-    print('Loading WDM Trail page...')
-    sleep(10)
-    print('WDM Trail page loaded!')
+        # Renombrar y mover el archivo
+        shutil.move(old_path, new_path)
+        print(f"Archivo renombrado a {new_filename} y movido a {destination_folder}")
 
-    # Click -> Manage WDM Trail.
-    gui.moveTo(212, 373)
-    gui.click()
-
-    # Wait until Manage WDM Trail page is completely loaded.
-    print('Loading Manage WDM Trail page...')
-    sleep(10)
-    print('Manage WDM Trail page loaded!')
-
-    # Click -> Filter All.
-    gui.moveTo(992, 955)
-    gui.click()
-
-    # Wait until filter is applied.
-    print('Filtering...')
-    sleep(10)
-    print('Filter applied!')
-
-    # Click -> Save As.
-    gui.moveTo(1864, 574)
-    gui.click()
-
-    # Click -> File name [...].
-    '''gui.moveTo(830, 750)
-    gui.click()
-
-    # Click -> File Type.
-    gui.moveTo(550, 740)
-    gui.click()
-
-    # Click -> CSV Files (*.csv).
-    gui.moveTo(550, 760)
-    gui.click()
-
-    # Click -> Save.
-    gui.moveTo(800, 805)
-    gui.click()'''
-
-    # Click -> OK.
-    gui.moveTo(1025, 669)
-    gui.click()
-
-    # Wait until Manage WDM Trail file is downloaded.
-    print('Downloading Manage WDM Trail file...')
-    sleep(60)
-    print('Manage WDM Trail page downloaded!')
+    except Exception as e:
+        print(f"Ocurrió un error: {e}")
 
 
 if __name__ == '__main__':
-    print(gui.size(), ' -> ', gui.position())
-    move()
-    #sleep(10)
-    #send_to_sftp()
+    
+    rename_and_move_zip('Acaponeta 2')
