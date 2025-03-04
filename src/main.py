@@ -6,7 +6,7 @@ import pyautogui as gui
 def move() -> None:
     # Click -> Network Management.
     sleep(4)
-    gui.moveTo(215, 535)
+    gui.moveTo(149, 390)
     gui.click()
 
     # Wait until Network Management page is completely loaded.
@@ -15,11 +15,11 @@ def move() -> None:
     print('Network Management page loaded!')
 
     # Click -> Service.
-    gui.moveTo(853, 144)
+    gui.moveTo(599, 101)
     gui.click()
 
     # Click -> WDM Trail.
-    gui.moveTo(923, 647)
+    gui.moveTo(635, 512)
     gui.click()
 
     # Wait until WDM Trail page is completely loaded.
@@ -28,7 +28,7 @@ def move() -> None:
     print('WDM Trail page loaded!')
 
     # Click -> Manage WDM Trail.
-    gui.moveTo(212, 373)
+    gui.moveTo(161, 280)
     gui.click()
 
     # Wait until Manage WDM Trail page is completely loaded.
@@ -37,7 +37,7 @@ def move() -> None:
     print('Manage WDM Trail page loaded!')
 
     # Click -> Filter All.
-    gui.moveTo(992, 955)
+    gui.moveTo(709, 635)
     gui.click()
 
     # Wait until filter is applied.
@@ -46,7 +46,7 @@ def move() -> None:
     print('Filter applied!')
 
     # Click -> Save As.
-    gui.moveTo(1864, 574)
+    gui.moveTo(1318, 418)
     gui.click()
 
     # Click -> File name [...].
@@ -66,7 +66,7 @@ def move() -> None:
     gui.click()'''
 
     # Click -> OK.
-    gui.moveTo(1025, 669)
+    gui.moveTo(752, 495)
     gui.click()
 
     # Wait until Manage WDM Trail file is downloaded.
